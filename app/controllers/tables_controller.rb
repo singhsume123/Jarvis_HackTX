@@ -3,8 +3,10 @@ class TablesController < ApplicationController
 
   # GET /tables
   # GET /tables.json
+  before_filter :load_restaurant
+
   def index
-    @tables = Table.all
+    @tables = @restaurant.tables.all
   end
 
   # GET /tables/1
@@ -70,5 +72,9 @@ class TablesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def table_params
       params.require(:table).permit(:status, :capacity, :restaurant_id)
+    end
+
+    def load_restaurant
+      @restaurant = Restaurant.find(params[:restaurant_id])
     end
 end
