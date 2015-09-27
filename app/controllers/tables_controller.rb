@@ -1,6 +1,4 @@
 class TablesController < ApplicationController
-  before_action :set_table, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :verify_authenticity_token
   # GET /tables
   # GET /tables.json
 before_filter :load_restaurant
