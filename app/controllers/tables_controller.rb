@@ -59,19 +59,17 @@ class TablesController < ApplicationController
   # DELETE /tables/1
   # DELETE /tables/1.json
   def destroy
+    @table = @restaurant.tables.find(params[:id])
     @table.destroy
     respond_to do |format|
-      format.html { redirect_to tables_url, notice: 'Table was successfully destroyed.' }
+      format.html { redirect_to restaurant_tables_path(@restaurant), notice: 'Table was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_table
-      @table = Table.find(params[:id])
-    end
-
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def table_params
       params.require(:table).permit(:status, :capacity, :restaurant_id)
@@ -80,4 +78,9 @@ class TablesController < ApplicationController
     def load_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
     end
+    
+    def set_table
+      @table = Table.find(params[:id])
+    end
+
 end
