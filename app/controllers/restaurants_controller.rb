@@ -42,7 +42,8 @@ class RestaurantsController < ApplicationController
   # PATCH/PUT /restaurants/1.json
   def update
     @json = JSON.parse(request.body.read)
-    @restaurant.update_attributes!(:avgwaittime => @json['avgwaittime'])
+    @restaurant.update_attributes!(:avgwaittime => Integer(@json['avgwaittime']))
+    @restaurant.update_attributes!(:name => Integer(@json['name']))
     render json: @restaurant, status: 200
     #@restaurant.update_attributes!(restaurant_params)
   end
