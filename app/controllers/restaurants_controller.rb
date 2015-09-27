@@ -42,11 +42,8 @@ class RestaurantsController < ApplicationController
   # PATCH/PUT /restaurants/1.json
   def update
     @json = JSON.parse(request.body.read)
-    
-    #@restaurant.assign_attributes(@json['restaurant'])
-    #@restaurant.save;
-    #render json: @json
     @restaurant.update_attributes!(:avgwaittime => @json['avgwaittime'])
+    render json: "Table Updated", status: 200
     #@restaurant.update_attributes!(restaurant_params)
   end
 

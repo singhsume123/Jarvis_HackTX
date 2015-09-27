@@ -7,7 +7,7 @@ class TablesController < ApplicationController
 
   def index
     @tables = @restaurant.tables.all
- 
+    render json: @tables 
   end
 
   # GET /tables/1
@@ -46,15 +46,18 @@ class TablesController < ApplicationController
   # PATCH/PUT /tables/1.json
   def update
     @table = @restaurant.tables.find(params[:id])
-    respond_to do |format|
-      if @table.update(table_params)
-        format.html { redirect_to [@restaurant,@table], notice: 'Table was successfully updated.' }
-        format.json { render :show, status: :ok, location: @table }
-      else
-        format.html { render :edit }
-        format.json { render json: @table.errors, status: :unprocessable_entity }
-      end
-    end
+    @json = JSON.parse(request.body.read)
+    @table.update_attributes!(:status => @json['status'])
+    render json: "Status Updated", status: 200
+    #respond_to do |format|
+      #if @table.update(table_params)
+       # format.html { redirect_to [@restaurant,@table], notice: 'Table was successfully updated.' }
+       # format.json { render :show, status: :ok, location: @table }
+      #else
+       # format.html { render :edit }
+      #  format.json { render json: @table.errors, status: :unprocessable_entity }
+     # end
+    #end
   end
 
   # DELETE /tables/1
