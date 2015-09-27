@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">manager</string>
+
+    <string name="hello_world">Manager View</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">Update Wait-Time</string>
+    <string name="button_send">Confirm</string>
+    <string name="title_activity_response">Response</string>
+</resources>
