@@ -7,6 +7,7 @@ class TablesController < ApplicationController
 
   def index
     @tables = @restaurant.tables.all
+ 
   end
 
   # GET /tables/1
@@ -78,7 +79,7 @@ class TablesController < ApplicationController
     def load_restaurant
       @restaurant = Restaurant.find(params[:restaurant_id])
     end
-    
+
     def set_table
       @table = Table.find(params[:id])
     end

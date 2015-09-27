@@ -1,10 +1,11 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
-
+  skip_before_filter :verify_authenticity_token
   # GET /restaurants
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+    render json: @restaurants
   end
 
   # GET /restaurants/1
@@ -40,15 +41,13 @@ class RestaurantsController < ApplicationController
   # PATCH/PUT /restaurants/1
   # PATCH/PUT /restaurants/1.json
   def update
-    respond_to do |format|
-      if @restaurant.update(restaurant_params)
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @restaurant }
-      else
-        format.html { render :edit }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
-      end
-    end
+    @json = JSON.parse(request.body.read)
+    
+    #@restaurant.assign_attributes(@json['restaurant'])
+    #@restaurant.save;
+    #render json: @json
+    @restaurant.update_attributes!(:avgwaittime => @json['avgwaittime'])
+    #@restaurant.update_attributes!(restaurant_params)
   end
 
   # DELETE /restaurants/1
