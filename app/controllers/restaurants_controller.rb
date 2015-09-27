@@ -43,7 +43,7 @@ class RestaurantsController < ApplicationController
   def update
     @json = JSON.parse(request.body.read)
     @restaurant.update_attributes!(:avgwaittime => @json['avgwaittime'])
-    render json: "Table Updated", status: 200
+    render json: @restaurant, status: 200
     #@restaurant.update_attributes!(restaurant_params)
   end
 
