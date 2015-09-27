@@ -1,10 +1,10 @@
 class TablesController < ApplicationController
   before_action :set_table, only: [:show, :edit, :update, :destroy]
-
+  skip_before_filter :verify_authenticity_token
   # GET /tables
   # GET /tables.json
-  before_filter :load_restaurant
-
+before_filter :load_restaurant
+skip_before_filter :verify_authenticity_token
   def index
     @tables = @restaurant.tables.all
     render json: @tables 
@@ -80,11 +80,12 @@ class TablesController < ApplicationController
     end
 
     def load_restaurant
-      @restaurant = Restaurant.find(params[:restaurant_id])
+       @restaurant = Restaurant.find(params[:restaurant_id])
     end
 
     def set_table
       @table = Table.find(params[:id])
+     
     end
 
 end
