@@ -22,6 +22,7 @@ class TablesController < ApplicationController
 
   # GET /tables/1/edit
   def edit
+    @table = @restaurant.tables.find(params[:id])
   end
 
   # POST /tables
@@ -43,9 +44,10 @@ class TablesController < ApplicationController
   # PATCH/PUT /tables/1
   # PATCH/PUT /tables/1.json
   def update
+    @table = @restaurant.tables.find(params[:id])
     respond_to do |format|
       if @table.update(table_params)
-        format.html { redirect_to @table, notice: 'Table was successfully updated.' }
+        format.html { redirect_to [@restaurant,@table], notice: 'Table was successfully updated.' }
         format.json { render :show, status: :ok, location: @table }
       else
         format.html { render :edit }
