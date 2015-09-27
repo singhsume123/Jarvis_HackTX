@@ -44,7 +44,8 @@ class RestaurantsController < ApplicationController
     @json = JSON.parse(request.body.read)
   #  @restaurant.update_attributes!(:avgwaittime => Integer(@json['avgwaittime']))
     length1= @jason['avgwaittime'].length
-    val = @jason['avgwaittime'][1..length1-1]
+    val = @jason['avgwaittime']
+    val = val[1..length1-1]
     @restaurant.update_attributes!(:avgwaittime => Integer(val))
     render json: @restaurant, status: 200
     #@restaurant.update_attributes!(restaurant_params)
